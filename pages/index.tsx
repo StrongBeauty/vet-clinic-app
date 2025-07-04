@@ -1,8 +1,8 @@
-import { PetClinicDashboard } from "@/components/pet-clinic-dashboard";
-import type { NextPage } from "next";
+import { Dashboard } from '@/components/Dashboard/Dashboard';
+import type { NextPage } from 'next';
 
 const Home: NextPage = () => {
-  return <PetClinicDashboard />;
+    return <Dashboard />;
 };
 
 export default Home;

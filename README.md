@@ -10,10 +10,22 @@ First, install dependencies:
 yarn install
 ```
 
+Start project 
+
+```bash
+yarn  build-start
+```
+
 Then, run the development server:
 
 ```bash
 yarn dev
+```
+
+run lint fix
+
+```bash
+yarn lint-fix
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
