@@ -7,7 +7,7 @@ import { useDebounce } from 'hooks/useDebounce';
 import DashboardContainer from '@/components/UI/Containers/DashboardContainer';
 import FetchStatus from '@/components/UI/Containers/FetchStatus';
 import { filterPatients } from '@/components/Dashboard/helpers/patientHelpers';
-import ActionModal from '@/components/UI/Modal/ActionModal';
+import DynamicActionModal from '@/components/UI/Modal/DynamicActionModal';
 import PatientTable from '@/components/Table/PatientTable';
 import { Add, Edit } from '@/components/UI/Icons/Icons';
 import Title from '@/components/UI/Titles/Title';
@@ -61,34 +61,38 @@ export const Dashboard: FC = () => {
     }, [currentPatient, deletePatient, handleCloseModal]);
 
     return (
-        <FetchStatus isLoading={isLoading} error={error}>
-            <DashboardContainer>
-                <div className="flex items-center justify-between mb-4">
-                    <Title title="Pet Clinic Dashboard" />
-                    <button
-                        tabIndex={1}
-                        onClick={() => handleOpenModal()}
-                        className="mt-4 mb-6 inline-flex items-center gap-2 rounded-md bg-primary text-white px-4 py-2 text-sm font-semibold shadow-md hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                    >
-                        <Add className="h-4 w-4" />
-                        Add patient
-                    </button>
-                </div>
-                <PatientTable data={filteredPatients} handleOpenModal={handleOpenModal} searchTerm={searchTerm} onSearchChange={setSearchTerm} />
-                {isModalOpen ? (
-                    <ActionModal
-                        open={isModalOpen}
-                        data={currentPatient}
-                        onClose={handleCloseModal}
-                        onSave={handleSavePatient}
-                        title={currentPatient ? 'Edit patient' : 'Add patient'}
-                        titleIcon={currentPatient ? <Edit /> : <Add />}
-                        onDelete={currentPatient ? handleDeletePatient : undefined}
-                    />
-                ) : (
-                    <></>
-                )}
-            </DashboardContainer>
-        </FetchStatus>
+        <DashboardContainer>
+            <FetchStatus isLoading={isLoading} error={error} />
+            {!isLoading && !error && (
+                <>
+                    <div className="flex items-center justify-between mb-4">
+                        <Title title="Pet Clinic Dashboard" />
+                        <button
+                            tabIndex={1}
+                            onClick={() => handleOpenModal()}
+                            onMouseEnter={() => import('@/components/UI/Loaders/ComponentLoader')}
+                            className="mt-4 mb-6 inline-flex items-center gap-2 rounded-md bg-primary text-white px-4 py-2 text-sm font-semibold shadow-md hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                        >
+                            <Add className="h-4 w-4" />
+                            Add patient
+                        </button>
+                    </div>
+                    <PatientTable data={filteredPatients} handleOpenModal={handleOpenModal} searchTerm={searchTerm} onSearchChange={setSearchTerm} />
+                    {isModalOpen ? (
+                        <DynamicActionModal
+                            open={isModalOpen}
+                            data={currentPatient}
+                            onClose={handleCloseModal}
+                            onSave={handleSavePatient}
+                            title={currentPatient ? 'Edit patient' : 'Add patient'}
+                            titleIcon={currentPatient ? <Edit /> : <Add />}
+                            onDelete={currentPatient ? handleDeletePatient : undefined}
+                        />
+                    ) : (
+                        <></>
+                    )}
+                </>
+            )}
+        </DashboardContainer>
     );
 };

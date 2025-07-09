@@ -18,6 +18,7 @@ Key functionalities include: data fetching, filtering, editing, deleting, and mo
 - **Modal component:** Controlled component supporting both add and edit modes with dynamic fields.
 - **Debounce search:** Custom debounce hook to minimize unnecessary renders and API calls.
 - **User feedback:** Loading indicators and error messages to improve UX.
+- **Adaptive Interface:** Responsive layout that adjusts to different screen sizes (mobile, tablet, desktop).
 
 ## 4. Challenges and Solutions
 - **React hooks dependency warnings:** Refactored complex dependencies by extracting variables outside hooks.

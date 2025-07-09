@@ -28,7 +28,7 @@ export const createPatientColumns = (onEdit: (patient: IPatient) => void): Colum
         header: '',
         accessorKey: 'actions',
         cell: ({ row }) => (
-            <IconButton tabIndex={4} onClick={() => onEdit(row.original)} aria-label="edit" size="small">
+            <IconButton tabIndex={4} onClick={() => onEdit(row.original)} onMouseEnter={() => import('@/components/UI/Loaders/ComponentLoader')} aria-label="edit" size="small">
                 <Edit />
             </IconButton>
         ),

@@ -1,20 +1,28 @@
 'use client';
 
 import { ComponentLoader } from '@/components/UI/Loaders/ComponentLoader';
-import { ErrorMessage } from '@/components/UI/Errors/ErrorMessage';
 import { FC, memo } from 'react';
 import { IFetchStatus } from '@/components/UI/Containers/interfaces';
+import ErrorMessage from '@/components/UI/Errors/ErrorMessage';
 
-const FetchStatus: FC<IFetchStatus> = ({ isLoading, error, children }) => {
+const FetchStatus: FC<IFetchStatus> = ({ isLoading, error }) => {
     if (error) {
-        return <ErrorMessage error={error.message} />;
+        return (
+            <div className="row-span-2 flex items-center justify-center">
+                <ErrorMessage error={error.message} />
+            </div>
+        );
     }
 
     if (isLoading) {
-        return <ComponentLoader />;
+        return (
+            <div className="row-span-2 flex items-center justify-center">
+                <ComponentLoader />
+            </div>
+        );
     }
 
-    return <>{children}</>;
+    return null;
 };
 
 export default memo(FetchStatus);
