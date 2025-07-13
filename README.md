@@ -12,6 +12,16 @@ First, install dependencies:
 yarn install
 ```
 
+Copy .env.example to .env.local
+
+```bash
+cp .env.example .env.local
+```
+
+or 
+
+Manually create .env.local and paste content from .env.example
+
 Start project 
 
 ```bash
